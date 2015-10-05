@@ -7,7 +7,6 @@ import Chart from "./chart";
 import CodeBlock from "./codeblock";
 import InfoPane from "./info";
 import Map from "./map";
-import StepNav from "./stepnav";
 
 export default React.createClass({
 
