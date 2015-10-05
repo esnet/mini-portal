@@ -7,7 +7,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 
 // routing
-var api        = require('./routes/api.js');
+// var api        = require('./routes/api.js');
 var index      = require('./routes/index.js');
 
 // middleware
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // routing
 app.use('/', index);
-app.use('/api', api);
+// app.use('/api', api);
 
 // start
 app.listen(port);
