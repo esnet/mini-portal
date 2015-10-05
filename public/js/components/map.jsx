@@ -76,7 +76,7 @@ const stylesMap = {
 };
 
 const nodeSizeMap = {
-    hub: 20,
+    hub: 10,
 };
 
 const edgeColorMap = [
