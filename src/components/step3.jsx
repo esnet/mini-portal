@@ -96,7 +96,7 @@ export default React.createClass({
                 </div>
                 <hr />
                 <div className="row">
-                    <CodeBlock file="components/map.jsx" codeKey="map" />
+                    <CodeBlock file="src/components/map.jsx" codeKey="map" />
                 </div>
             </div>
         );

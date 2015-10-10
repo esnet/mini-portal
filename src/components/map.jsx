@@ -103,7 +103,7 @@ export default React.createClass({
     render() {
         if (this.props.mock) {
             return (
-                <img src="img/map.png" alt="[map]"
+                <img src="static/img/map.png" alt="[map]"
                      style={{width: "100%", height: "325px" }} />
             );
         }

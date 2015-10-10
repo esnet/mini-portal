@@ -4,10 +4,9 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint public/js/**/* routes/*.js",
-    "test": "npm run lint && karma start",
-    "test-only": "karma start",
-    "start": "node server.js",
-    "start-tester": "karma start --single-run=false"
+    "start": "webpack-dev-server  --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@esnet/pond": "^0.1.3",
@@ -33,7 +32,7 @@
     "bundle-loader": "^0.5.0",
     "chai": "^1.9.1",
     "css-loader": "^0.9.0",
-    "eslint": "^0.24.0",
+    "eslint": "^1.5.0",
     "eslint-plugin-react": "^3.3.1",
     "file-loader": "^0.7.2",
     "history": "^1.9.1",

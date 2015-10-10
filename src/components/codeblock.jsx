@@ -22,7 +22,7 @@ export default React.createClass({
         let file = this.props.file;
 
         $.ajax({
-            url: `code/${file}`,
+            url: `${file}`,
             dataType: "text",
             type: "GET",
             contentType: "text/plain",
@@ -32,7 +32,7 @@ export default React.createClass({
             error: function (xhr, status, err) {
                 console.error(`Failed to load code: ${file}`, err);
             }
-        });        
+        });
     },
 
     _receiveFile(text) {
@@ -42,14 +42,11 @@ export default React.createClass({
 
         let lines = text.split("\n");
 
-        let line = '';
-        let lineno = 0;
         let inBlock = false;
         let included = [];
         let nsnippets = 0;
 
-        for (lineno in lines) {
-            line = lines[lineno];
+        for (let line of lines) {
             if (line === startMarker) {
                 nsnippets++;
                 inBlock = true;
@@ -74,7 +71,7 @@ export default React.createClass({
             code: code
         });
     },
-       
+
     render() {
         if (this.state.codeLoaded) {
             return (

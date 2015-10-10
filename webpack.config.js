@@ -5,17 +5,16 @@
 module.exports = {
 
     entry: {
-        app: ["./public/js/client.js"]
+        app: ["./src/portal-entry.js"]
     },
 
     output: {
-        filename: "./build/bundle.js"
+        filename: "./bundle.js"
     },
 
     module: {
         loaders: [
-            { test: /\.(js|jsx)$/,
-                loader: "babel?optional=es7.objectRestSpread" },
+            { test: /\.(js|jsx)$/, loader: "babel?stage=0" },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=20000"},
             { test: /\.json$/, loader: "json-loader" },

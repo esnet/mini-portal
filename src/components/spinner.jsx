@@ -2,7 +2,7 @@
 
 var React = require("react");
 var loader = document.createElement("img");
-loader.src = require("../../img/loader.gif");
+loader.src = require("../../static/img/loader.gif");
 
 /** start: spin */
 var Spinner = React.createClass({
@@ -10,7 +10,7 @@ var Spinner = React.createClass({
         return (
             <div>
                 <img className="img-responsive"
-                     style={{margin: "0 auto", "padding-top": "50px"}}
+                     style={{margin: "0 auto", paddingTop: "50px"}}
                      src={loader.src} />
             </div>
         );

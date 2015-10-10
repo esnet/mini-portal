@@ -1,6 +1,10 @@
 import React from "react";
 import {State, Link} from "react-router";
 
+import Markdown from "react-markdown";
+
+import text from "raw!../../README.md";
+
 export default React.createClass({
 
     // Router state
@@ -27,9 +31,12 @@ export default React.createClass({
         return (
             <div>
                 <div className="row">
-                    <div className="col-sm-9">
-                        This is a demonstration of charts and maps.
-
+                    <div className="col-md-9">
+                        <Markdown source={text} />
+                    </div>
+                    <div className="col-md-3">
+                        <br />
+                        <br />
                         <ul>
                             <li>
                                 <Link to="step0">Step 0</Link> Wireframe
@@ -46,6 +53,7 @@ export default React.createClass({
                         </ul>
 
                     </div>
+
                 </div>
             </div>
         );

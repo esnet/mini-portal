@@ -35,9 +35,7 @@ export default React.createClass({
             }
         });
     },
-/** end: fetch */
 
-/** start: process */
     _receiveTrafficData(data) {
         let processedData = {};
         _.each(data, (d, k) => {
@@ -55,7 +53,7 @@ export default React.createClass({
             tracker: tracker,
         });
     },
-/** end: process */
+/** end: fetch */
 
     trackerChanged(t) {
         this.setState({tracker: t});
@@ -80,7 +78,7 @@ export default React.createClass({
                         </div>
                         <br />
                         <div>
-                            <Chart mock={true}
+                            <Chart mock={false}
                                    trafficLoaded={this.state.trafficLoaded}
                                    trafficData={this.state.trafficData}
                                    trafficKey={this.state.trafficKey}
@@ -98,9 +96,7 @@ export default React.createClass({
                 </div>
                 <hr />
                 <div className="row">
-                    <CodeBlock file="components/step1.jsx" codeKey="fetch" />
-                    <CodeBlock file="components/step1.jsx" codeKey="process" />
-                    <CodeBlock file="components/info.jsx" codeKey="pond" />
+                    <CodeBlock file="src/components/chart.jsx" codeKey="chart" />
                 </div>
             </div>
         );
