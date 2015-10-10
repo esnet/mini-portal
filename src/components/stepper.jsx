@@ -47,7 +47,7 @@ export default React.createClass({
 
         return (
             <nav>
-                <ul className="pagination">
+                <ul className="pagination pull-right">
                     {steps}
                 </ul>
             </nav>
