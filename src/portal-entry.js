@@ -1,3 +1,5 @@
+import "babel/polyfill";
+
 import React from "react";
 import App from "./components/app";
 import Intro from "./components/intro";

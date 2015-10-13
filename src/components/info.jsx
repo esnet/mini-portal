@@ -14,7 +14,7 @@ export default React.createClass({
     render() {
         if (this.props.mock) {
             return (
-                <img src="img/infopane.png" alt="[infopane]"
+                <img src="static/img/infopane.png" alt="[infopane]"
                      style={{ width: "100%" }} />
             );
         }

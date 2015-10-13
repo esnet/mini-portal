@@ -6,6 +6,8 @@ import hotkey from "react-hotkey";
 
 hotkey.activate();
 
+import Stepper from "./stepper";
+
 export default React.createClass({
 
     // Router state
@@ -23,11 +25,24 @@ export default React.createClass({
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-12">
-                        <hr />
+                    <div className="col-md-9">
+                        <div id="title">
+                            <h2>mini-portal</h2>
+                        </div>
+                    </div>
+                    <div className="col-md-3">
+                        <Stepper />
                     </div>
                 </div>
-                <RouteHandler />
+
+                <div>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <hr />
+                        </div>
+                    </div>
+                    <RouteHandler />
+                </div>
             </div>
         );
     }

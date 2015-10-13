@@ -33,7 +33,7 @@ export default React.createClass({
     render() {
         if (this.props.mock) {
             return (
-                <img src="img/chart.png" alt="[chart]"
+                <img src="static/img/chart.png" alt="[chart]"
                      style={{ width: "100%", height: "200px" }} />
             );
         }

@@ -69,7 +69,7 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div id="map-container">
-                            <Map mock={false}
+                            <Map mock={true}
                                  trafficLoaded={this.state.trafficLoaded}
                                  trafficData={this.state.trafficData}
                                  trafficKey={this.state.trafficKey}
@@ -96,7 +96,7 @@ export default React.createClass({
                 </div>
                 <hr />
                 <div className="row">
-                    <CodeBlock file="components/map.jsx" codeKey="map" />
+                    <CodeBlock file="src/components/chart.jsx" codeKey="chart" />
                 </div>
             </div>
         );

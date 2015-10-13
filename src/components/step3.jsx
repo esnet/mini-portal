@@ -35,9 +35,7 @@ export default React.createClass({
             }
         });
     },
-/** end: fetch */
 
-/** start: process */
     _receiveTrafficData(data) {
         let processedData = {};
         _.each(data, (d, k) => {
@@ -55,7 +53,7 @@ export default React.createClass({
             tracker: tracker,
         });
     },
-/** end: process */
+/** end: fetch */
 
     trackerChanged(t) {
         this.setState({tracker: t});
@@ -71,7 +69,7 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div id="map-container">
-                            <Map mock={true}
+                            <Map mock={false}
                                  trafficLoaded={this.state.trafficLoaded}
                                  trafficData={this.state.trafficData}
                                  trafficKey={this.state.trafficKey}
@@ -80,7 +78,7 @@ export default React.createClass({
                         </div>
                         <br />
                         <div>
-                            <Chart mock={true}
+                            <Chart mock={false}
                                    trafficLoaded={this.state.trafficLoaded}
                                    trafficData={this.state.trafficData}
                                    trafficKey={this.state.trafficKey}
@@ -97,10 +95,14 @@ export default React.createClass({
                     </div>
                 </div>
                 <hr />
+                <div className="alert alert-info" role="alert">
+                    Note: You can click on an edge on the map to show the chart
+                    for that edge only. Click on the map background to show the
+                    total of both edges.
+                 </div>
+                <hr />
                 <div className="row">
-                    <CodeBlock file="components/step1.jsx" codeKey="fetch" />
-                    <CodeBlock file="components/step1.jsx" codeKey="process" />
-                    <CodeBlock file="components/info.jsx" codeKey="pond" />
+                    <CodeBlock file="src/components/map.jsx" codeKey="map" />
                 </div>
             </div>
         );
