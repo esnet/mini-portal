@@ -90,14 +90,30 @@ const edgeColorMap = [
 ];
 
 export default React.createClass({
-    _handleSelectionChanged(type, selection) {
-        if (type === "edge" && selection === "BNL--CERN") {
+    getInitialState() {
+        return {
+            mapSelection: {
+                edges: [],
+                nodes: [],
+            }
+        };
+    },
+
+    _handleSelectionChanged(selectionType, selection) {
+        if (selectionType === "edge" && selection === "BNL--CERN") {
             this.props.trafficKeyChanged("BNL");
-        } else if (type === "edge" && selection === "CERN--FNAL") {
+        } else if (selectionType === "edge" && selection === "CERN--FNAL") {
             this.props.trafficKeyChanged("FNAL");
         } else if (this.props.trafficKey !== "Total") {
             this.props.trafficKeyChanged("Total");
         }
+
+        let mapSelection = {
+            nodes: selectionType === "node" ? [selection] : [],
+            edges: selectionType === "edge" ? [selection] : []
+        };
+
+        this.setState({mapSelection: mapSelection});
     },
 
     render() {
@@ -152,6 +168,7 @@ export default React.createClass({
                         height={325}
                         margin={75}
                         traffic={traffic}
+                        selection={this.state.mapSelection}
                         onSelectionChange={this._handleSelectionChanged}
                         edgeColorMap={edgeColorMap}
                         stylesMap={stylesMap}
