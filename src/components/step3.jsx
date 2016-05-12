@@ -1,5 +1,5 @@
 import React from "react";
-import {TimeSeries} from "@esnet/pond";
+import { TimeSeries } from "pondjs";
 import _ from "underscore";
 
 
@@ -39,18 +39,15 @@ export default React.createClass({
     _receiveTrafficData(data) {
         let processedData = {};
         _.each(data, (d, k) => {
-            processedData[k] = {
-                "in": new TimeSeries(d["in"]),
-                out: new TimeSeries(d["out"])
-            };
+            processedData[k] = new TimeSeries(d);
         });
 
-        let tracker = processedData["Total"]["in"].end();
+        let tracker = processedData["Total"].end();
 
         this.setState({
             trafficData: processedData,
             trafficLoaded: true,
-            tracker: tracker,
+            tracker: tracker
         });
     },
 /** end: fetch */

@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router";
+
 import _ from "underscore";
 
 export default React.createClass({
@@ -6,10 +8,10 @@ export default React.createClass({
 
     _getStep() {
         let step = -1;
-        let hash = window.location.hash;
+        let loc = window.location.pathname;
 
-        if (hash.indexOf("step") > -1) {
-            step = parseInt(hash[hash.length-1]);
+        if (loc.indexOf("step") > -1) {
+            step = parseInt(loc[loc.length-1]);
         }
 
         return step;
@@ -18,30 +20,30 @@ export default React.createClass({
     render() {
         let step = this._getStep();
 
-        let steps = _.map([-1, 0, 1, 2, 3], function(n) {
-            let klass = "";
-            if (n === step) {
-                klass = "active";
-            }
-
+        let steps = _.map([-1, 0, 1, 2, 3], function (n) {
             if (n === -1) {
                 if (n === step) {
                     return (
-                        <li className="active"><span>Intro</span></li>
-                    )
+                        <li key={n} className="active"><span>Intro</span></li>
+                    );
                 }
                 return (
-                    <li><a key={`step${n}`} className={klass} href="#">Intro</a></li>
+                    <li key={n} >
+                        <Link to="/">Intro</Link>
+                    </li>
                 );
             }
             if (n === step) {
                 return (
-                    <li className="active"><span>{n}</span></li>
-                )
+                    <li key={n} className="active"><span>{n}</span></li>
+                );
             } else {
                 return (
-                    <li><a key={`step${n}`} className={klass} href={`#step${n}`}>{n}</a></li>
-                )
+                    <li key={n}>
+                        <Link to={`/step${n}`}>{n}</Link>
+                    </li>
+
+                );
             }
         });
 

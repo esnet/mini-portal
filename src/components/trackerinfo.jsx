@@ -11,14 +11,13 @@ export default React.createClass({
         let timeseries = this.props.timeseries;
 
         if (tracker) {
-            let trafficIndex = timeseries["in"].bisect(tracker);
+            let trafficIndex = timeseries.bisect(tracker);
 
-            let inValue = timeseries["in"].at(trafficIndex);
-            let outValue = timeseries["out"].at(trafficIndex);
-            let time = Util.formatDate(inValue.timestamp());
+            let event = timeseries.at(trafficIndex);
+            let time = Util.formatDate(event.timestamp());
 
-            let inFormatted = Util.scaleUnits(inValue.get("value"));
-            let outFormatted = Util.scaleUnits(outValue.get("value"));
+            let inFormatted = Util.scaleUnits(event.get("in"));
+            let outFormatted = Util.scaleUnits(event.get("out"));
 
             trackerInfo = (
                 <div>

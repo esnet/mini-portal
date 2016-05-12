@@ -31,8 +31,8 @@ export default React.createClass({
             let timeseries = trafficData[trafficKey];
             let rows = _.map(["in", "out"], (direction) => {
 /** start: pond */
-                let average = timeseries[direction].avg("value");
-                let maximum = timeseries[direction].max("value");
+                let average = timeseries.avg(direction);
+                let maximum = timeseries.max(direction);
 /** end: pond */
                 return (
                     <tr key={direction}>
@@ -45,17 +45,19 @@ export default React.createClass({
 
             trafficTable = (
                 <table className="table">
-                    <tr>
-                        <th></th>
-                        <th>Avg</th>
-                        <th>Max</th>
-                    </tr>
-                    {rows}
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th>Avg</th>
+                            <th>Max</th>
+                        </tr>
+                        {rows}
+                    </tbody>
                 </table>
             );
 
 /** start: pond */
-            let range = trafficData[trafficKey]["in"].range();
+            let range = trafficData[trafficKey].range("in");
             let beginTime = Util.formatDate(range.begin());
             let endTime = Util.formatDate(range.end());
 /** end: pond */

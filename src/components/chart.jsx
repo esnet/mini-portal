@@ -1,12 +1,14 @@
 import React from "react";
 import _ from "underscore";
 
+import { TimeSeries } from "pondjs";
+
 import { Charts,
          ChartContainer,
          ChartRow,
          YAxis,
          AreaChart,
-         Resizable } from "@esnet/react-timeseries-charts";
+         Resizable } from "react-timeseries-charts";
 
 
 import Spinner from "./spinner";
@@ -16,13 +18,13 @@ export default React.createClass({
 
     getDefaultProps() {
         return {
-            mock: false,
+            mock: false
         };
     },
 
     getInitialState() {
         return {
-            tracker: null,
+            tracker: null
         };
     },
 
@@ -49,25 +51,28 @@ export default React.createClass({
         }
 
         let timeSeries = trafficData[trafficKey];
-
         let maxValue = _.max([
-            timeSeries["in"].max("value"),
-            timeSeries["out"].max("value")
+            timeSeries.max("in"),
+            timeSeries.max("out")
         ]);
-
-        let timerange = timeSeries["in"].range();
+        let timerange = timeSeries.range();
         let tracker = this.props.tracker;
 /** start: chart */
         let chart = (
             <Resizable>
                 <ChartContainer timeRange={timerange}
                                 onTrackerChanged={this.handleTrackerChanged}
-                                trackerPosition={tracker}>
+                                trackerPosition={tracker}
+                                minDuration={1000 * 60 * 60}
+                                maxTime={timerange.end()}
+                                minTime={timerange.begin()}>
 
                     <ChartRow height="150">
                         <Charts>
                             <AreaChart axis="traffic"
-                                       series={[[timeSeries["in"]], [timeSeries["out"]]]} />
+                                       fillOpacity={0.8}
+                                       series={timeSeries}
+                                       columns={{up: ["in"], down: ["out"]}} />
                         </Charts>
                         <YAxis id="traffic"
                                label="Traffic (bps)"

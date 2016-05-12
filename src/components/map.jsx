@@ -1,12 +1,12 @@
 import React from "react";
 
-import {Event} from "@esnet/pond";
-import {TrafficMap} from "@esnet/react-network-diagrams";
+import { Event } from "pondjs";
+import { TrafficMap } from "react-network-diagrams";
 
 import Spinner from "./spinner";
 
 /** start: map */
-var nodes = [
+const nodes = [
     {
         name: "BNL",
         type: "hub",
@@ -37,22 +37,22 @@ var nodes = [
         label_position: "right",
         x: 10.0,
         y: 10.0
-    },
+    }
 ];
 
 /** start: map */
-var edges = [
+const edges = [
     {
         capacity: "100G",
         source: "CERN",
-        target: "FNAL",
+        target: "FNAL"
     },
 /** end: map */
     {
         capacity: "100G",
         source: "BNL",
-        target: "CERN",
-    },
+        target: "CERN"
+    }
 ];
 
 const hubStyle = {
@@ -72,11 +72,11 @@ const hubStyle = {
 
 // Mapping of node type to style
 const stylesMap = {
-    hub: hubStyle,
+    hub: hubStyle
 };
 
 const nodeSizeMap = {
-    hub: 10,
+    hub: 10
 };
 
 const edgeColorMap = [
@@ -89,12 +89,19 @@ const edgeColorMap = [
     {color: "#74a9cf", label: "0 - 1", range: [0, 1]}
 ];
 
+const edgeThicknessMap = {
+    "100G": 5,
+    "10G": 3,
+    "1G": 1.5,
+    subG: 1
+};
+
 export default React.createClass({
     getInitialState() {
         return {
             mapSelection: {
                 edges: [],
-                nodes: [],
+                nodes: []
             }
         };
     },
@@ -113,7 +120,7 @@ export default React.createClass({
             edges: selectionType === "edge" ? [selection] : []
         };
 
-        this.setState({mapSelection: mapSelection});
+        this.setState({mapSelection});
     },
 
     render() {
@@ -137,26 +144,26 @@ export default React.createClass({
         let tracker = this.props.tracker;
         let timestamp = tracker;
         if (!tracker) {
-            timestamp = trafficData["Total"]["in"].end();
+            timestamp = trafficData["Total"].end();
         }
 
 
-        let index = trafficData["Total"]["in"].bisect(timestamp);
+        let index = trafficData["Total"].bisect(timestamp);
 
 /** start: map */
         let edgeTraffic = {
-            "BNL--CERN": trafficData["BNL"]["out"].at(index).get("value"),
-            "CERN--BNL": trafficData["BNL"]["in"].at(index).get("value"),
-            "FNAL--CERN": trafficData["FNAL"]["out"].at(index).get("value"),
-            "CERN--FNAL": trafficData["FNAL"]["in"].at(index).get("value"),
+            "BNL--CERN": trafficData["BNL"].at(index).get("in"),
+            "CERN--BNL": trafficData["BNL"].at(index).get("out"),
+            "FNAL--CERN": trafficData["FNAL"].at(index).get("in"),
+            "CERN--FNAL": trafficData["FNAL"].at(index).get("out")
         };
 /** end: map */
 
         let traffic = new Event(timestamp, edgeTraffic);
 
         let topo = {
-            nodes: nodes,
-            edges: edges
+            nodes,
+            edges
         };
 
         let width = $("#map-container").width();
@@ -164,13 +171,15 @@ export default React.createClass({
         return (
 /** start: map */
             <TrafficMap topology={topo}
-                        width={width}
+                        autoSize={false}
                         height={325}
                         margin={75}
                         traffic={traffic}
                         selection={this.state.mapSelection}
                         onSelectionChange={this._handleSelectionChanged}
                         edgeColorMap={edgeColorMap}
+                        edgeDrawingMethod="bidirectionalArrow"
+                        edgeThicknessMap={edgeThicknessMap}
                         stylesMap={stylesMap}
                         nodeSizeMap={nodeSizeMap} />
 /** end: map */

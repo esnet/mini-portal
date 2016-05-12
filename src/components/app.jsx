@@ -1,25 +1,10 @@
 import React from "react";
 import Router from "react-router";
 
-var {RouteHandler, History} = Router;
-import hotkey from "react-hotkey";
-
-hotkey.activate();
-
 import Stepper from "./stepper";
 
 export default React.createClass({
-
-    // Router state
-    mixins: [History, hotkey.Mixin("handleHotkey")],
-
-    handleHotkey(e) {
-        e.preventDefault();
-        let key = String.fromCharCode(e.which);
-        if (key in ["0", "1", "2", "3"]) {
-            window.location.hash = `#/step${key}`;
-        }
-    },
+    displayName: "MiniPortalApp",
 
     render() {
         return (
@@ -41,7 +26,7 @@ export default React.createClass({
                             <hr />
                         </div>
                     </div>
-                    <RouteHandler />
+                    {this.props.children}
                 </div>
             </div>
         );

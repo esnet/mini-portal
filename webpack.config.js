@@ -4,9 +4,7 @@
 
 module.exports = {
 
-    entry: {
-        app: ["./src/portal-entry.js"]
-    },
+    entry: "./src/portal-entry.js",
 
     output: {
         filename: "./bundle.js"
@@ -14,7 +12,11 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.(js|jsx)$/, loader: "babel?stage=0" },
+            {
+                test: /\.(js|jsx)$/,
+                loader: "babel",
+                exclude: /node_modules/
+            },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.(png|jpg|gif)$/, loader: "url-loader?limit=20000"},
             { test: /\.json$/, loader: "json-loader" },
