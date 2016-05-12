@@ -20,7 +20,7 @@ export default React.createClass({
     render() {
         let step = this._getStep();
 
-        let steps = _.map([-1, 0, 1, 2, 3], function (n) {
+        let steps = _.map([-1, 0, 1, 2, 3, 4], function (n) {
             if (n === -1) {
                 if (n === step) {
                     return (

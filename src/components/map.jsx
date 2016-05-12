@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Event } from "pondjs";
-import { TrafficMap } from "react-network-diagrams";
+import { TrafficMap, MapEditor } from "react-network-diagrams";
 
 import Spinner from "./spinner";
 
 /** start: map */
-const nodes = [
+let nodes = [
     {
         name: "BNL",
         type: "hub",
@@ -41,7 +41,7 @@ const nodes = [
 ];
 
 /** start: map */
-const edges = [
+let edges = [
     {
         capacity: "100G",
         source: "CERN",
@@ -90,11 +90,21 @@ const edgeColorMap = [
 ];
 
 export default React.createClass({
+    getDefaultProps() {
+        return ({
+            mode: "display"
+        });
+    },
+
     getInitialState() {
         return {
             mapSelection: {
                 edges: [],
                 nodes: []
+            },
+            topology: {
+                nodes,
+                edges
             }
         };
     },
@@ -116,14 +126,41 @@ export default React.createClass({
         this.setState({mapSelection});
     },
 
-    render() {
-        if (this.props.mock) {
-            return (
-                <img src="static/img/map.png" alt="[map]"
-                     style={{width: "100%", height: "325px" }} />
-            );
-        }
+    _handleTopologyChanged(topology) {
+        this.setState({topology});
+    },
 
+    _renderMock() {
+        return (
+            <img src="static/img/map.png" alt="[map]"
+                style={{width: "100%", height: "325px" }} />
+        );
+    },
+
+    render() {
+        switch(this.props.mode) {
+            case "mock":
+                let foo = this._renderMock();
+                console.log("MREND>", foo);
+                return foo;
+            case "display":
+                let ddd = this._renderDisplay();
+                console.log("DREND>", ddd);
+                return ddd;
+            case "edit":
+                let editor = this._renderEditor();
+                console.log("RENDER>", editor);
+                return editor;
+            default:
+                return (
+                    <div>
+                        `Unknown mode: ${this.props.mode}`
+                    </div>
+                );
+        }
+    },
+
+    _renderDisplay() {
         let trafficLoaded = this.props.trafficLoaded;
 
         if (!trafficLoaded) {
@@ -154,16 +191,11 @@ export default React.createClass({
 
         let traffic = new Event(timestamp, edgeTraffic);
 
-        let topo = {
-            nodes,
-            edges
-        };
-
         let width = $("#map-container").width();
 
         return (
 /** start: map */
-            <TrafficMap topology={topo}
+            <TrafficMap topology={this.state.topology}
                         autoSize={false}
                         height={325}
                         margin={75}
@@ -176,5 +208,29 @@ export default React.createClass({
                         nodeSizeMap={nodeSizeMap} />
 /** end: map */
         );
+    },
+
+    _renderEditor() {
+        console.log("render editor");
+        const bounds = {
+            x1: 0, y1: 0,
+            x2: 225, y2: 120
+        };
+        let editor = (
+            <MapEditor
+                topology={this.state.topology}
+                bounds={bounds}
+                edgeColorMap={edgeColorMap}
+                edgeDrawingMethod="bidirectionalArrow"
+                nodeSizeMap={nodeSizeMap}
+                stylesMap={stylesMap}
+                nodeSizeMap={nodeSizeMap}
+                gridSize={0.5}
+                onTopologyChange={this._handleTopologyChanged} />
+        );
+
+        console.log("EDITOR>", editor);
+
+        return editor;
     }
 });

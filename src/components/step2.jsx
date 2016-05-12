@@ -66,7 +66,7 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div id="map-container">
-                            <Map mock={true}
+                            <Map mode="mock"
                                  trafficLoaded={this.state.trafficLoaded}
                                  trafficData={this.state.trafficData}
                                  trafficKey={this.state.trafficKey}

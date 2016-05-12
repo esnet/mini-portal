@@ -24,7 +24,7 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div>
-                            <Map mock={true} />
+                            <Map mode="mock" />
                         </div>
                         <div>
                             <Chart mock={true} />
