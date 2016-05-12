@@ -89,13 +89,6 @@ const edgeColorMap = [
     {color: "#74a9cf", label: "0 - 1", range: [0, 1]}
 ];
 
-const edgeThicknessMap = {
-    "100G": 5,
-    "10G": 3,
-    "1G": 1.5,
-    subG: 1
-};
-
 export default React.createClass({
     getInitialState() {
         return {
@@ -179,7 +172,6 @@ export default React.createClass({
                         onSelectionChange={this._handleSelectionChanged}
                         edgeColorMap={edgeColorMap}
                         edgeDrawingMethod="bidirectionalArrow"
-                        edgeThicknessMap={edgeThicknessMap}
                         stylesMap={stylesMap}
                         nodeSizeMap={nodeSizeMap} />
 /** end: map */
