@@ -67,7 +67,7 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div id="map-container">
-                            <Map mode={this.state.mapMode}
+                            <Map editable={true}
                                  trafficLoaded={this.state.trafficLoaded}
                                  trafficData={this.state.trafficData}
                                  trafficKey={this.state.trafficKey}
@@ -94,9 +94,7 @@ export default React.createClass({
                 </div>
                 <hr />
                 <div className="alert alert-info" role="alert">
-                    Note: You can click on an edge on the map to show the chart
-                    for that edge only. Click on the map background to show the
-                    total of both edges.
+                    Note: You can click on the Edit button to edit the map.
                  </div>
                 <hr />
                 <div className="row">

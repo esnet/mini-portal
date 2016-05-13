@@ -8,6 +8,7 @@ import Spinner from "./spinner";
 /** start: map */
 let nodes = [
     {
+        id: 1,
         name: "BNL",
         type: "hub",
         capacity: "100G",
@@ -19,6 +20,7 @@ let nodes = [
     },
 /** end: map */
     {
+        id: 2,
         name: "FNAL",
         type: "hub",
         capacity: "100G",
@@ -29,6 +31,7 @@ let nodes = [
         y: 5.0
     },
     {
+        id: 3,
         name: "CERN",
         type: "hub",
         capacity: "100G",
@@ -43,12 +46,14 @@ let nodes = [
 /** start: map */
 let edges = [
     {
+        id: 11,
         capacity: "100G",
         source: "CERN",
         target: "FNAL"
     },
 /** end: map */
     {
+        id: 12,
         capacity: "100G",
         source: "BNL",
         target: "CERN"
@@ -92,7 +97,7 @@ const edgeColorMap = [
 export default React.createClass({
     getDefaultProps() {
         return ({
-            mode: "display"
+            editable: false
         });
     },
 
@@ -103,9 +108,12 @@ export default React.createClass({
                 nodes: []
             },
             topology: {
+                name: "test",
+                description: "test",
                 nodes,
                 edges
-            }
+            },
+            mode: "display"
         };
     },
 
@@ -138,19 +146,15 @@ export default React.createClass({
     },
 
     render() {
-        switch(this.props.mode) {
-            case "mock":
-                let foo = this._renderMock();
-                console.log("MREND>", foo);
-                return foo;
+        if (this.props.mock) {
+            return (this._renderMock());
+        }
+
+        switch(this.state.mode) {
             case "display":
-                let ddd = this._renderDisplay();
-                console.log("DREND>", ddd);
-                return ddd;
+                return this._renderDisplay();
             case "edit":
-                let editor = this._renderEditor();
-                console.log("RENDER>", editor);
-                return editor;
+                return this._renderEditor();
             default:
                 return (
                     <div>
@@ -193,12 +197,24 @@ export default React.createClass({
 
         let width = $("#map-container").width();
 
-        return (
+        let button = null;
+        if(this.props.editable) {
+            button = <button className="btn btn-primary" onClick={this._editMap}>Edit</button>;
+        }
+
+        const bounds = {
+            x1: 4, y1: 4,
+            x2: 11, y2: 16
+        };
+
 /** start: map */
+        return (
+            <div>
             <TrafficMap topology={this.state.topology}
                         autoSize={false}
                         height={325}
-                        margin={75}
+                        margin={50}
+                        bounds={bounds}
                         traffic={traffic}
                         selection={this.state.mapSelection}
                         onSelectionChange={this._handleSelectionChanged}
@@ -206,20 +222,40 @@ export default React.createClass({
                         edgeDrawingMethod="bidirectionalArrow"
                         stylesMap={stylesMap}
                         nodeSizeMap={nodeSizeMap} />
-/** end: map */
+            <br />
+            {button}
+            </div>
         );
+/** end: map */
+    },
+
+    _editMap() {
+        this.setState({ mode: "edit" });
+    },
+
+    _saveMap() {
+        this.setState({ mode: "display" });
     },
 
     _renderEditor() {
-        console.log("render editor");
         const bounds = {
-            x1: 0, y1: 0,
-            x2: 225, y2: 120
+            x1: 4, y1: 4,
+            x2: 11, y2: 16
         };
+
+        let button = null;
+        if(this.props.editable) {
+            button = <button className="btn btn-primary" onClick={this._saveMap}>Save</button>;
+        }
+
         let editor = (
+            <div>
             <MapEditor
-                topology={this.state.topology}
+                height={325}
+                margin={50}
                 bounds={bounds}
+                autoSize={false}
+                topology={this.state.topology}
                 edgeColorMap={edgeColorMap}
                 edgeDrawingMethod="bidirectionalArrow"
                 nodeSizeMap={nodeSizeMap}
@@ -227,9 +263,10 @@ export default React.createClass({
                 nodeSizeMap={nodeSizeMap}
                 gridSize={0.5}
                 onTopologyChange={this._handleTopologyChanged} />
+            <br />
+            {button}
+            </div>
         );
-
-        console.log("EDITOR>", editor);
 
         return editor;
     }

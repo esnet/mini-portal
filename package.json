@@ -20,7 +20,7 @@
         "react": "^0.14.7",
         "react-hotkey": "^0.5.0",
         "react-markdown": "^1.0.3",
-        "react-network-diagrams": "git+ssh://git@github.com/esnet/react-network-diagrams.git#auto-sizing",
+        "react-network-diagrams": "^0.6.0",
         "react-timeseries-charts": "git+ssh://git@github.com/esnet/react-timeseries-charts.git#v0.9",
         "react-router": "1.0.0",
         "scroll-behavior": "^0.3.0",
