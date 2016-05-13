@@ -21,11 +21,6 @@ export default React.createClass({
                 </div>
 
                 <div>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <hr />
-                        </div>
-                    </div>
                     {this.props.children}
                 </div>
             </div>
