@@ -1,22 +1,20 @@
-import React from "react";
-import _ from "underscore";
+import React, { Component } from "react";
 
 import Markdown from "react-markdown";
 
 import Highlighter from "./highlighter";
 import Spinner from "./spinner";
+import $ from "jquery";
 
-export default React.createClass({
-    displayName: "CodeBlock",
+export default class CodeBlock extends Component {
+    displayName: "CodeBlock";
 
-    mixins: [Highlighter],
+    mixins: [Highlighter];
 
-    getInitialState() {
-        return {
-            codeLoaded: false,
-            code: null,
-        };
-    },
+    state = {
+        codeLoaded: false,
+        code: null
+    };
 
     componentWillMount() {
         let file = this.props.file;
@@ -26,14 +24,14 @@ export default React.createClass({
             dataType: "text",
             type: "GET",
             contentType: "text/plain",
-            success: function (data) {
+            success: function(data) {
                 this._receiveFile(data);
             }.bind(this),
-            error: function (xhr, status, err) {
+            error: function(xhr, status, err) {
                 console.error(`Failed to load code: ${file}`, err);
             }
         });
-    },
+    }
 
     _receiveFile(text) {
         let codeKey = this.props.codeKey;
@@ -70,17 +68,13 @@ export default React.createClass({
             codeLoaded: true,
             code: code
         });
-    },
+    }
 
     render() {
         if (this.state.codeLoaded) {
-            return (
-                <Markdown source={this.state.code} />
-            );
+            return <Markdown source={this.state.code} />;
         } else {
-            return (
-                <Spinner />
-            );
+            return <Spinner />;
         }
     }
-});
+}

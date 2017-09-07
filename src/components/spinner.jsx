@@ -1,21 +1,20 @@
-"use strict";
+import React, { Component } from "react";
 
-var React = require("react");
-var loader = document.createElement("img");
-loader.src = require("../../static/img/loader.gif");
+import loader from "../img/loader.gif";
 
 /** start: spin */
-var Spinner = React.createClass({
-    render: function () {
+export default class Spinner extends Component {
+    render() {
         return (
             <div>
-                <img className="img-responsive"
-                     style={{margin: "0 auto", paddingTop: "50px"}}
-                     src={loader.src} />
+                <img
+                    className="img-responsive"
+                    style={{ margin: "0 auto", paddingTop: "50px" }}
+                    src={loader}
+                    alt="Item loading..."
+                />
             </div>
         );
     }
-});
+}
 /** end: spin */
-
-module.exports = Spinner;

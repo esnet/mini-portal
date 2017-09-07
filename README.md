@@ -6,6 +6,9 @@ This "mini-portal" is a demonstration of several of the packages used in the [My
    * [react-network-diagrams](http://software.es.net/react-network-diagrams)
    * [pond](http://software.es.net/pond)
 
+
+This was built using [create-react-app](https://github.com/facebookincubator/create-react-app) which is a great way to bootstrap a React project.
+
 ### Running the code locally
 
 Here's the steps to run the code so you can experiment with it.

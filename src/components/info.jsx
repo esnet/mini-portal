@@ -1,27 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import _ from "underscore";
 
-import Util from "../utils/util";
+import { scaleUnits, formatDate } from "../utils/util";
 
 import TrackerInfo from "./trackerinfo";
+import mockInfo from "../img/infopane.png";
 
-export default React.createClass({
-    displayName: "InfoPane",
-
-    getDefaultProps() {
-    },
+export default class InfoPane extends Component {
+    displayName = "InfoPane";
 
     render() {
         if (this.props.mock) {
-            return (
-                <img src="static/img/infopane.png" alt="[infopane]"
-                     style={{ width: "100%" }} />
-            );
+            return <img src={mockInfo} alt="[infopane]" style={{ width: "100%" }} />;
         }
 
         let trafficTable = null;
-        let trackerInfo = (<div></div>);
-        let trafficRange = (<div></div>);
+        let trackerInfo = <div />;
+        let trafficRange = <div />;
 
         let trafficData = this.props.trafficData;
         let trafficLoaded = this.props.trafficLoaded;
@@ -29,16 +24,22 @@ export default React.createClass({
 
         if (trafficLoaded) {
             let timeseries = trafficData[trafficKey];
-            let rows = _.map(["in", "out"], (direction) => {
-/** start: pond */
+            let rows = _.map(["in", "out"], direction => {
+                /** start: pond */
                 let average = timeseries.avg(direction);
                 let maximum = timeseries.max(direction);
-/** end: pond */
+                /** end: pond */
                 return (
                     <tr key={direction}>
-                        <th>{direction}</th>
-                        <td>{Util.scaleUnits(average, "b/s")}</td>
-                        <td>{Util.scaleUnits(maximum, "b/s")}</td>
+                        <th>
+                            {direction}
+                        </th>
+                        <td>
+                            {scaleUnits(average, "b/s")}
+                        </td>
+                        <td>
+                            {scaleUnits(maximum, "b/s")}
+                        </td>
                     </tr>
                 );
             });
@@ -47,7 +48,7 @@ export default React.createClass({
                 <table className="table">
                     <tbody>
                         <tr>
-                            <th></th>
+                            <th />
                             <th>Avg</th>
                             <th>Max</th>
                         </tr>
@@ -56,29 +57,33 @@ export default React.createClass({
                 </table>
             );
 
-/** start: pond */
+            /** start: pond */
             let range = trafficData[trafficKey].range("in");
-            let beginTime = Util.formatDate(range.begin());
-            let endTime = Util.formatDate(range.end());
-/** end: pond */
+            let beginTime = formatDate(range.begin());
+            let endTime = formatDate(range.end());
+            /** end: pond */
 
             trafficRange = (
                 <div>
-                    <div>Begin:&nbsp;{beginTime}</div>
-                    <div>End:&nbsp;{endTime}</div>
+                    <div>
+                        Begin:&nbsp;{beginTime}
+                    </div>
+                    <div>
+                        End:&nbsp;{endTime}
+                    </div>
                     <br />
                 </div>
             );
 
             let tracker = this.props.tracker;
-            trackerInfo = (
-                <TrackerInfo timeseries={timeseries} tracker={tracker} />
-            );
+            trackerInfo = <TrackerInfo timeseries={timeseries} tracker={tracker} />;
         }
 
         return (
             <div>
-                <h4>{trafficKey}</h4>
+                <h4>
+                    {trafficKey}
+                </h4>
                 {trafficRange}
                 {trafficTable}
                 <hr />
@@ -86,4 +91,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

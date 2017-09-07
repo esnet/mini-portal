@@ -1,22 +1,14 @@
-import React from "react";
-import {State} from "react-router";
+import React, { Component } from "react";
 
 import InfoPane from "./info";
 import Chart from "./chart";
 import Map from "./map";
 
-export default React.createClass({
-
-    // Router state
-    mixins: [State],
-
-
-    getInitialState() {
-        return {
-            trafficLoaded: false,
-            trafficData: null,
-        };
-    },
+export default class Step0 extends Component {
+    state = {
+        trafficLoaded: false,
+        trafficData: null
+    };
 
     render() {
         return (
@@ -37,4 +29,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

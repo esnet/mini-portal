@@ -1,29 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import { TimeSeries } from "pondjs";
 import _ from "underscore";
-
+import $ from "jquery";
 
 import Chart from "./chart";
 import CodeBlock from "./codeblock";
 import InfoPane from "./info";
 import Map from "./map";
 
-export default React.createClass({
+export default class Step1 extends Component {
+    state = {
+        trafficLoaded: false,
+        trafficData: null,
+        trafficKey: "Total",
+        codeLoaded: false,
+        code: "",
+        tracker: null
+    };
 
-    getInitialState() {
-        return {
-            trafficLoaded: false,
-            trafficData: null,
-            trafficKey: "Total",
-            codeLoaded: false,
-            code: "",
-            tracker: null
-        };
-    },
-/** start: fetch */
+    /** start: fetch *
     componentDidMount() {
         $.ajax({
-            url: "data/traffic.json",
+            url: `${process.env.PUBLIC_URL}/data/traffic.json`,
             dataType: "json",
             type: "GET",
             contentType: "application/json",
@@ -34,10 +32,10 @@ export default React.createClass({
                 console.error("Failed to load traffic data", err);
             }
         });
-    },
+    }
 /** end: fetch */
 
-/** start: process */
+    /** start: process */
     _receiveTrafficData(data) {
         let processedData = {};
         _.each(data, (d, k) => {
@@ -51,16 +49,16 @@ export default React.createClass({
             trafficLoaded: true,
             tracker: tracker
         });
-    },
-/** end: process */
+    }
+    /** end: process */
 
     trackerChanged(t) {
-        this.setState({tracker: t});
-    },
+        this.setState({ tracker: t });
+    }
 
     trafficKeyChanged(k) {
-        this.setState({trafficKey: k});
-    },
+        this.setState({ trafficKey: k });
+    }
 
     render() {
         return (
@@ -68,29 +66,35 @@ export default React.createClass({
                 <div className="row">
                     <div className="col-sm-9">
                         <div id="map-container">
-                            <Map mock={true}
-                                 trafficLoaded={this.state.trafficLoaded}
-                                 trafficData={this.state.trafficData}
-                                 trafficKey={this.state.trafficKey}
-                                 trafficKeyChanged={this.trafficKeyChanged}
-                                 tracker={this.state.tracker} />
+                            <Map
+                                mock={true}
+                                trafficLoaded={this.state.trafficLoaded}
+                                trafficData={this.state.trafficData}
+                                trafficKey={this.state.trafficKey}
+                                trafficKeyChanged={this.trafficKeyChanged}
+                                tracker={this.state.tracker}
+                            />
                         </div>
                         <br />
                         <div>
-                            <Chart mock={true}
-                                   trafficLoaded={this.state.trafficLoaded}
-                                   trafficData={this.state.trafficData}
-                                   trafficKey={this.state.trafficKey}
-                                   trackerChanged={this.trackerChanged}
-                                   tracker={this.state.tracker} />
+                            <Chart
+                                mock={true}
+                                trafficLoaded={this.state.trafficLoaded}
+                                trafficData={this.state.trafficData}
+                                trafficKey={this.state.trafficKey}
+                                trackerChanged={this.trackerChanged}
+                                tracker={this.state.tracker}
+                            />
                         </div>
                     </div>
-                    <div className="col-sm-3" style={{border: "1px solid #ccc", height: "540px" }}>
-                        <InfoPane mock={false}
-                                  trafficLoaded={this.state.trafficLoaded}
-                                  trafficData={this.state.trafficData}
-                                  trafficKey={this.state.trafficKey}
-                                  tracker={this.state.tracker} />
+                    <div className="col-sm-3" style={{ border: "1px solid #ccc", height: "540px" }}>
+                        <InfoPane
+                            mock={false}
+                            trafficLoaded={this.state.trafficLoaded}
+                            trafficData={this.state.trafficData}
+                            trafficKey={this.state.trafficKey}
+                            tracker={this.state.tracker}
+                        />
                     </div>
                 </div>
                 <hr />
@@ -102,4 +106,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

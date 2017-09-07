@@ -1,38 +1,33 @@
-import React from "react";
-import {State, Link} from "react-router";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import Markdown from "react-markdown";
 
-import text from "raw!../../README.md";
+import readmeFile from "../README.md";
 
-export default React.createClass({
-
-    // Router state
-    mixins: [State],
-
-
-    getInitialState() {
-        return {
-            trafficLoaded: false,
-            trafficData: null,
-        };
-    },
+export default class Intro extends Component {
+    state = {
+        trafficLoaded: false,
+        trafficData: null,
+        readmeText: null
+    };
 
     componentDidMount() {
-    },
+        fetch(readmeFile).then(response => response.text()).then(readmeText => {
+            this.setState({ readmeText });
+        });
+    }
 
-    componentWillUnmount() {
-    },
+    componentWillUnmount() {}
 
-    _onChange() {
-    },
+    _onChange() {}
 
     render() {
         return (
             <div>
                 <div className="row">
                     <div className="col-md-9">
-                        <Markdown source={text} />
+                        <Markdown source={this.state.readmeText} />
                     </div>
                     <div className="col-md-3">
                         <br />
@@ -51,11 +46,9 @@ export default React.createClass({
                                 <Link to="step3">Step 3</Link> Traffic Map
                             </li>
                         </ul>
-
                     </div>
-
                 </div>
             </div>
         );
     }
-});
+}
