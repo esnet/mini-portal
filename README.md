@@ -20,7 +20,4 @@ Here's the steps to run the code so you can experiment with it.
 3. Visit [http://localhost:8080](http://localhost:8080/) 
    in your favorite browser.
 
-
-## 2. Steps Involved
-
 ---

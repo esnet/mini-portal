@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Markdown from "react-markdown";
 import Stepper from "./stepper";
-import readmeFile from "../README.md";
+import readmeFile from "../Introduction.md";
 
 export default class Intro extends Component {
     state = {
