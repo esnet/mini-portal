@@ -63,6 +63,8 @@ export default class Step4 extends Component {
         return (
             <div>
                 <div className="row">
+                    <h2 style={{margin: 10}}> Step 4: Network Diagram Editor </h2>
+                    <br />
                     <div className="col-sm-9">
                         <div id="map-container">
                             <Map

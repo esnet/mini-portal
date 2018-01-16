@@ -64,6 +64,8 @@ export default class Step1 extends Component {
         return (
             <div>
                 <div className="row">
+                    <h2 style={{margin: 10}}> Step 1: Data Loading </h2>
+                    <br />
                     <div className="col-sm-9">
                         <div id="map-container">
                             <Map

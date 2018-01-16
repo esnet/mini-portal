@@ -39,7 +39,7 @@ export default class Stepper extends Component {
                 return (
                     <li key={n} className="active">
                         <span>
-                            {n}
+                            Step {n}
                         </span>
                     </li>
                 );
@@ -47,7 +47,7 @@ export default class Stepper extends Component {
                 return (
                     <li key={n}>
                         <Link to={`/step${n}`}>
-                            {n}
+                            Step {n}
                         </Link>
                     </li>
                 );
@@ -56,7 +56,7 @@ export default class Stepper extends Component {
 
         return (
             <nav>
-                <ul className="pagination pull-right">
+                <ul className="pagination pull-left">
                     {steps}
                 </ul>
             </nav>

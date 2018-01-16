@@ -1,4 +1,6 @@
-# mini-portal
+## 1. Introduction
+
+---
 
 This "mini-portal" is a demonstration of several of the packages used in the [MyESnet Portal](https://my.es.net/).  In particular it shows an example of using:
 
@@ -15,5 +17,10 @@ Here's the steps to run the code so you can experiment with it.
 
 1. npm install
 2. npm run start
-3. Visit [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/) 
+3. Visit [http://localhost:8080](http://localhost:8080/) 
    in your favorite browser.
+
+
+## 2. Steps Involved
+
+---

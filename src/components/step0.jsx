@@ -14,6 +14,8 @@ export default class Step0 extends Component {
         return (
             <div>
                 <div className="row">
+                    <h2 style={{margin: 10}}> Step 0: Wireframe </h2>
+                    <br />
                     <div className="col-sm-9">
                         <div>
                             <Map mock={true} />

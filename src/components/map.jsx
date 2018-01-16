@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Event } from "pondjs";
+import { Event, TimeEvent } from "pondjs";
 import { TrafficMap, MapEditor } from "react-network-diagrams";
 
 import Spinner from "./spinner";
@@ -192,7 +192,7 @@ export default class Map extends Component {
         };
         /** end: map */
 
-        let traffic = new Event(timestamp, edgeTraffic);
+        let traffic = new TimeEvent(timestamp, edgeTraffic);
 
         let button = null;
         if (this.props.editable) {

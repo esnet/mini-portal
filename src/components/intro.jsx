@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Markdown from "react-markdown";
-
+import Stepper from "./stepper";
 import readmeFile from "../README.md";
 
 export default class Intro extends Component {
@@ -26,12 +26,8 @@ export default class Intro extends Component {
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-md-12">
                         <Markdown source={this.state.readmeText} />
-                    </div>
-                    <div className="col-md-3">
-                        <br />
-                        <br />
                         <ul>
                             <li>
                                 <Link to="step0">Step 0</Link> Wireframe
@@ -44,6 +40,9 @@ export default class Intro extends Component {
                             </li>
                             <li>
                                 <Link to="step3">Step 3</Link> Traffic Map
+                            </li>
+                            <li>
+                                <Link to="step4">Step 4</Link> Network Diagram Editor
                             </li>
                         </ul>
                     </div>

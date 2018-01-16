@@ -62,6 +62,8 @@ export default class Step2 extends Component {
         return (
             <div>
                 <div className="row">
+                    <h2 style={{margin: 10}}> Step 2: Traffic Chart </h2>
+                    <br />
                     <div className="col-sm-9">
                         <div id="map-container">
                             <Map
