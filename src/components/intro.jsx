@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Markdown from "react-markdown";
-import Stepper from "./stepper";
 import readmeFile from "../README.md";
 
 export default class Intro extends Component {

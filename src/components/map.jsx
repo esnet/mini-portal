@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Event, TimeEvent } from "pondjs";
+import { TimeEvent } from "pondjs";
 import { TrafficMap, MapEditor } from "react-network-diagrams";
 
 import Spinner from "./spinner";

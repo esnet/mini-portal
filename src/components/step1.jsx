@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TimeSeries } from "pondjs";
 import _ from "underscore";
-import $ from "jquery";
+// import $ from "jquery";
 
 import Chart from "./chart";
 import CodeBlock from "./codeblock";

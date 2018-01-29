@@ -37,7 +37,7 @@ export default class Header extends Component {
                                 />
                             </a>
                             </span>
-                            <span style={{ fontSize: 32, marginLeft: 20, marginRight: 80 }}>ESnet Mini Portal</span>
+                            <span style={{ fontSize: 32, marginLeft: 20, marginRight: 80 }}>Mini Portal</span>
                         </div>
                     </div>
                     <div>

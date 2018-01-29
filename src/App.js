@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Step0 from "./components/step0";
 import Step1 from "./components/step1";
@@ -8,7 +8,6 @@ import Step2 from "./components/step2";
 import Step3 from "./components/step3";
 import Step4 from "./components/step4";
 import Intro from "./components/intro";
-import Stepper from "./components/stepper";
 import ScrollToTop from "./ScrollToTop";
 import Header from './Header';
 
