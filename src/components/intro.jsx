@@ -42,7 +42,7 @@ export default class Intro extends Component {
                                 <Link to="step3">Step 3</Link> Traffic Map
                             </li>
                             <li>
-                                <Link to="step4">Step 4</Link> Network Diagram Editor
+                                <Link to="step4">Step 4</Link> Map Editor
                             </li>
                         </ul>
                     </div>
