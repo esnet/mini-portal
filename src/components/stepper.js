@@ -1,12 +1,21 @@
+/**
+ *  Copyright (c) 2017 - present, The Regents of the University of California,
+ *  through Lawrence Berkeley National Laboratory (subject to receipt
+ *  of any required approvals from the U.S. Dept. of Energy).
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree.
+ */
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import _ from "underscore";
 
 export default class Stepper extends Component {
-    displayName: "Stepper";
+    displayName = "Stepper"
 
-    _getStep() {
+    getStep() {
         let step = -1;
         let loc = window.location.pathname;
 
@@ -18,7 +27,7 @@ export default class Stepper extends Component {
     }
 
     render() {
-        let step = this._getStep();
+        let step = this.getStep();
 
         let steps = _.map([-1, 0, 1, 2, 3, 4], function(n) {
             if (n === -1) {

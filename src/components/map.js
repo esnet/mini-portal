@@ -1,12 +1,21 @@
-import React, { Component } from "react";
+/**
+ *  Copyright (c) 2017 - present, The Regents of the University of California,
+ *  through Lawrence Berkeley National Laboratory (subject to receipt
+ *  of any required approvals from the U.S. Dept. of Energy).
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree.
+ */
 
+import React, { Component } from "react";
 import { TimeEvent } from "pondjs";
 import { TrafficMap, MapEditor } from "react-network-diagrams";
 
 import Spinner from "./spinner";
+
 import mockMap from "../img/map.png";
 
-/** start: map */
 let nodes = [
     {
         id: 1,
@@ -19,7 +28,6 @@ let nodes = [
         x: 5.0,
         y: 15.0
     },
-    /** end: map */
     {
         id: 2,
         name: "FNAL",
@@ -44,7 +52,6 @@ let nodes = [
     }
 ];
 
-/** start: map */
 let edges = [
     {
         id: 11,
@@ -52,7 +59,6 @@ let edges = [
         source: "CERN",
         target: "FNAL"
     },
-    /** end: map */
     {
         id: 12,
         capacity: "100G",
@@ -104,25 +110,24 @@ const edgeColorMap = [
 ];
 
 export default class Map extends Component {
-    defaultProps = {
-        editable: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            mapSelection: {
+                edges: [],
+                nodes: []
+            },
+            topology: {
+                name: "test",
+                description: "test",
+                nodes,
+                edges
+            },
+            mode: "display"
+        };
+    }
 
-    state = {
-        mapSelection: {
-            edges: [],
-            nodes: []
-        },
-        topology: {
-            name: "test",
-            description: "test",
-            nodes,
-            edges
-        },
-        mode: "display"
-    };
-
-    _handleSelectionChanged = (selectionType, selection) => {
+    handleSelectionChanged(selectionType, selection) {
         if (selectionType === "edge" && selection === "BNL--CERN") {
             this.props.trafficKeyChanged("BNL");
         } else if (selectionType === "edge" && selection === "CERN--FNAL") {
@@ -139,34 +144,19 @@ export default class Map extends Component {
         this.setState({ mapSelection });
     };
 
-    _handleTopologyChanged = topology => {
+    handleTopologyChanged(topology) {
         this.setState({ topology });
     };
 
-    _renderMock() {
-        return <img src={mockMap} alt="[map]" style={{ width: "100%", height: "325px" }} />;
-    }
+    editMap = () => {
+        this.setState({ mode: "edit" });
+    };
 
-    render() {
-        if (this.props.mock) {
-            return this._renderMock();
-        }
+    saveMap = () => {
+        this.setState({ mode: "display" });
+    };
 
-        switch (this.state.mode) {
-            case "display":
-                return this._renderDisplay();
-            case "edit":
-                return this._renderEditor();
-            default:
-                return (
-                    <div>
-                        `Unknown mode: ${this.props.mode}`
-                    </div>
-                );
-        }
-    }
-
-    _renderDisplay = () => {
+    renderDisplay = () => {
         let trafficLoaded = this.props.trafficLoaded;
 
         if (!trafficLoaded) {
@@ -183,21 +173,19 @@ export default class Map extends Component {
 
         let index = trafficData["Total"].bisect(timestamp);
 
-        /** start: map */
         let edgeTraffic = {
             "BNL--CERN": trafficData["BNL"].at(index).get("in"),
             "CERN--BNL": trafficData["BNL"].at(index).get("out"),
             "FNAL--CERN": trafficData["FNAL"].at(index).get("in"),
             "CERN--FNAL": trafficData["FNAL"].at(index).get("out")
         };
-        /** end: map */
 
         let traffic = new TimeEvent(timestamp, edgeTraffic);
 
         let button = null;
         if (this.props.editable) {
             button = (
-                <button className="btn btn-primary" onClick={this._editMap}>
+                <button className="btn btn-primary" onClick={this.editMap}>
                     Edit
                 </button>
             );
@@ -210,7 +198,6 @@ export default class Map extends Component {
             y2: 16
         };
 
-        /** start: map */
         return (
             <div>
                 <TrafficMap
@@ -221,7 +208,7 @@ export default class Map extends Component {
                     bounds={bounds}
                     traffic={traffic}
                     selection={this.state.mapSelection}
-                    onSelectionChange={this._handleSelectionChanged}
+                    onSelectionChange={(selectionType, selection) => this.handleSelectionChanged(selectionType, selection)}
                     edgeColorMap={edgeColorMap}
                     edgeDrawingMethod="bidirectionalArrow"
                     stylesMap={stylesMap}
@@ -231,18 +218,9 @@ export default class Map extends Component {
                 {button}
             </div>
         );
-        /** end: map */
     };
 
-    _editMap = () => {
-        this.setState({ mode: "edit" });
-    };
-
-    _saveMap = () => {
-        this.setState({ mode: "display" });
-    };
-
-    _renderEditor = () => {
+    renderEditor = () => {
         const bounds = {
             x1: 4,
             y1: 4,
@@ -253,7 +231,7 @@ export default class Map extends Component {
         let button = null;
         if (this.props.editable) {
             button = (
-                <button className="btn btn-primary" onClick={this._saveMap}>
+                <button className="btn btn-primary" onClick={this.saveMap}>
                     Save
                 </button>
             );
@@ -272,7 +250,7 @@ export default class Map extends Component {
                     nodeSizeMap={nodeSizeMap}
                     stylesMap={stylesMap}
                     gridSize={0.5}
-                    onTopologyChange={this._handleTopologyChanged}
+                    onTopologyChange={(topology) => this.handleTopologyChanged(topology)}
                 />
                 <br />
                 {button}
@@ -281,4 +259,31 @@ export default class Map extends Component {
 
         return editor;
     };
+
+    renderMock() {
+        return <img src={mockMap} alt="[map]" style={{ width: "100%", height: "325px" }} />;
+    }
+
+    render() {
+        if (this.props.mock) {
+            return this.renderMock();
+        }
+
+        switch (this.state.mode) {
+            case "display":
+                return this.renderDisplay();
+            case "edit":
+                return this.renderEditor();
+            default:
+                return (
+                    <div>
+                        `Unknown mode: ${this.props.mode}`
+                    </div>
+                );
+        }
+    }
 }
+
+Map.defaultProps = {
+    editable: false
+};

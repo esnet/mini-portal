@@ -1,8 +1,17 @@
+/**
+ *  Copyright (c) 2017 - present, The Regents of the University of California,
+ *  through Lawrence Berkeley National Laboratory (subject to receipt
+ *  of any required approvals from the U.S. Dept. of Energy).
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree.
+ */
+
 import React, { Component } from "react";
 
 import loader from "../img/loader.gif";
 
-/** start: spin */
 export default class Spinner extends Component {
     render() {
         return (
@@ -17,4 +26,3 @@ export default class Spinner extends Component {
         );
     }
 }
-/** end: spin */

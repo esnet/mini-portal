@@ -1,13 +1,23 @@
+/**
+ *  Copyright (c) 2017 - present, The Regents of the University of California,
+ *  through Lawrence Berkeley National Laboratory (subject to receipt
+ *  of any required approvals from the U.S. Dept. of Energy).
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree.
+ */
+
 import React, { Component } from "react";
 import _ from "underscore";
 
 import { scaleUnits, formatDate } from "../utils/util";
-
 import TrackerInfo from "./trackerinfo";
+
 import mockInfo from "../img/infopane.png";
 
 export default class InfoPane extends Component {
-    displayName = "InfoPane";
+    displayName = "InfoPane"
 
     render() {
         if (this.props.mock) {
@@ -25,10 +35,8 @@ export default class InfoPane extends Component {
         if (trafficLoaded) {
             let timeseries = trafficData[trafficKey];
             let rows = _.map(["in", "out"], direction => {
-                /** start: pond */
                 let average = timeseries.avg(direction);
                 let maximum = timeseries.max(direction);
-                /** end: pond */
                 return (
                     <tr key={direction}>
                         <th>
@@ -57,11 +65,9 @@ export default class InfoPane extends Component {
                 </table>
             );
 
-            /** start: pond */
             let range = trafficData[trafficKey].range("in");
             let beginTime = formatDate(range.begin());
             let endTime = formatDate(range.end());
-            /** end: pond */
 
             trafficRange = (
                 <div>
