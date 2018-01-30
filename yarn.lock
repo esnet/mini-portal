@@ -2101,6 +2101,10 @@ dom-helpers@^3.2.0, dom-helpers@^3.2.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
 
+dom-resize@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/dom-resize/-/dom-resize-1.0.3.tgz#df9d71e808171fdb66ee88517b0d1c02cdb98876"
+
 dom-serializer@0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
@@ -5611,9 +5615,9 @@ react-select@^0.9.1:
     classnames "^2.2.0"
     react-input-autosize "^0.6.2"
 
-react-timeseries-charts@^0.12.8:
-  version "0.12.8"
-  resolved "https://registry.yarnpkg.com/react-timeseries-charts/-/react-timeseries-charts-0.12.8.tgz#4854bdef82d1293c8624cf415c6be2e066d93845"
+react-timeseries-charts@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/react-timeseries-charts/-/react-timeseries-charts-0.13.1.tgz#4e52d1763cc34f2a30890669643015181fdef056"
   dependencies:
     array.prototype.fill "^1.0.1"
     babel-runtime "^6.23.0"
@@ -5629,6 +5633,7 @@ react-timeseries-charts@^0.12.8:
     d3-time "^1.0.7"
     d3-time-format "^2.0.5"
     d3-transition "^1.1.0"
+    dom-resize "^1.0.3"
     flexbox-react "^4.3.3"
     invariant "^2.1.1"
     merge "^1.2.0"
